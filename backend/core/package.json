@@ -23,8 +23,15 @@
     "test-unit": "vitest run --coverage --passWithNoTests"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.245.0",
     "@sls-mentor-release/serverless-configuration": "1.0.0",
-    "@swarmion/serverless-helpers": "^0.18.1"
+    "@swarmion/serverless-cdk-plugin": "^0.18.1",
+    "@swarmion/serverless-contracts": "^0.18.1",
+    "@swarmion/serverless-helpers": "^0.18.1",
+    "aws-cdk-lib": "^2.59.0",
+    "constructs": "^10.1.214",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.25.0",

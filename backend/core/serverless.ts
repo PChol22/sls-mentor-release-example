@@ -10,13 +10,19 @@ import {
   sharedProviderConfig,
 } from '@sls-mentor-release/serverless-configuration';
 
+import { SlsMentorReleaseStack } from 'resources';
+
 import { functions } from './functions';
 
 const serverlessConfiguration: AWS = {
   service: `${projectName}-core`, // Keep it short to have role name below 64
   frameworkVersion,
   configValidationMode: 'error',
-  plugins: ['serverless-esbuild'],
+  plugins: [
+    'serverless-esbuild',
+    '@swarmion/serverless-cdk-plugin',
+    'serverless-iam-roles-per-function',
+  ],
   provider: {
     ...sharedProviderConfig,
     httpApi: {
@@ -32,7 +38,6 @@ const serverlessConfiguration: AWS = {
     },
   },
   functions,
-  package: { individually: true },
   params: mergeStageParams(sharedParams, {
     dev: {
       apiGatewayCorsAllowedOrigins: ['http://localhost:3000'],
@@ -46,6 +51,9 @@ const serverlessConfiguration: AWS = {
   }),
   custom: {
     esbuild: sharedEsbuildConfig,
+    cdkPlugin: {
+      stack: SlsMentorReleaseStack,
+    },
   },
   resources: {
     Description: 'Core service',
